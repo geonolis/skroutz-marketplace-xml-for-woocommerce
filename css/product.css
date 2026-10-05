@@ -1,0 +1,54 @@
+#wpslash_skroutz_image_select_link
+{
+	width:100%;
+	float: left;
+	text-align: center;
+	margin:auto;
+	cursor: pointer;
+}
+#wpslash_skroutz_image_select_link_variation
+{
+	width:100%;
+	float: left;
+	text-align: center;
+	margin:auto;
+	cursor: pointer;
+}
+#wpslash_remove_skroutz_thumbnail
+{
+	width:100%;
+	float: left;
+	text-align: center;
+	margin:auto;
+	cursor: pointer;
+}
+
+ a[id*='wpslash_skroutz_image_select_link']{
+ 	width:100%;
+	float: left;
+	text-align: center;
+	margin:auto;
+	cursor: pointer;
+}
+ a[id*='wpslash_skroutz_image_select_link_variation']{
+ 	width:100%;
+	float: left;
+	text-align: center;
+	margin:auto;
+	cursor: pointer;
+}
+ a[id*='wpslash_remove_skroutz_thumbnail']{
+
+	width:100%;
+	float: left;
+	text-align: center;
+	margin:auto;
+	cursor: pointer;
+}
+.wpslash_skroutz_variation_alternate_image_wrapper
+{
+	float: left;
+width: 100%;
+margin: auto;
+text-align: left;
+}

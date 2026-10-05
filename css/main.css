@@ -1,0 +1,217 @@
+.wpslash_skroutz_accept_window
+{
+display: none;
+float: right;
+background: white;
+font-size: 10px;
+position: relative;
+width: 200px;
+padding: 11px;
+box-shadow: 2px 2px 39px 2px #bbb;
+top: auto;
+right: 0px;
+overflow: hidden;
+}
+.wpslash_skroutz_accept_window select, .wpslash_skroutz_reject_window select
+{
+	font-size: 10px;
+padding: 6px;
+width: 100%;
+margin-bottom: 10px;
+}
+.wpslash_skroutz_reject_window
+{
+display:none;
+float: left;
+background: white;
+font-size: 10px;
+position: relative;
+width: 200px;
+padding: 10px;
+box-shadow: 2px 2px 39px 2px #bbb;
+top: auto;
+right:55px;
+overflow: hidden;
+}
+
+.wpslash_skroutz_accept_window.show
+{
+display:block;
+}
+.wpslash_skroutz_reject_window.show
+{
+	display:block;
+}
+
+.wpslash-skroutz-status {
+    background: rgb(198 225 198);
+    color: #5b841b;
+    padding: 0px 8px;
+    line-height: 14px;
+    text-align: center;
+    border-radius: 4px;
+    line-height: 2.5em;
+}
+
+.wpslash-skroutz-status.dispatched {
+    background: #f8dda7;
+    color: #761919;
+}
+
+.wpslash-skroutz-status.partially_returned,
+.wpslash-skroutz-status.for_return {
+    background: #eaceff;
+    color: #432956;
+}
+
+.wpslash-skroutz-status.rejected {
+    background: #eba3a3;
+    color: #761919;
+}
+
+.wpslash-skroutz-status.cancelled,
+.wpslash-skroutz-status.expired {
+    background: #e5e5e5;
+    color: #777;
+}
+
+.wpslash-skroutz-status.delivered {
+	background: #c8d7e1;
+  color: #2e4453;
+}
+
+.wpslash-skroutz-tracking-code {
+    border: 1px dashed #2271b1;
+    padding: 1px;
+    text-align: center;
+    border-radius: 5px;
+    background: #f7fcff;
+    color: #2271b1;
+}
+.wpslash-skroutz-courier{
+	font-weight: bold;
+}
+
+.wpslash_smart_cart_field_wrapper {
+  float: left;
+font-size: 10px;
+line-height: 12px;
+flex-direction: column;
+width: 46%;
+margin-right: 4%;
+}
+.wpslash_smart_cart_field_wrapper label {
+    float: left;
+    width: 100%;
+    font-weight: bold;
+   margin-bottom: 5px;
+}
+.wpslash_smart_cart_invoice_wrapper {
+display: none;
+flex-wrap: wrap;
+flex-direction: row;
+margin-bottom: 3px;
+border: 1px dashed #a5a5a5;
+padding: 6px;
+margin-top: 6px;
+}
+.wpslash_smart_cart_invoice_wrapper.show {
+	display:flex;
+	}
+.wpslash-skoutz-smart-cart-gift-wrap {
+    text-align: center;
+    float: left;
+    margin-bottom: 3px;
+    border: 1px dashed #c96600;
+    border-radius: 3px;
+    background: #fff9ee;
+    color: #c96600;
+}
+
+.wp-list-table td.column-wpslash_skroutz_smart_cart.loading
+{
+	opacity:0.5;
+	pointer-events: none;
+}
+
+.post-type-shop_order .wp-list-table tbody td:last-child {
+	padding-right: 1em!important;
+}
+
+
+
+@media screen and (min-width: 1440px){
+
+	#wpslash_skroutz_smart_cart {
+		width: 8ch;
+	}
+}
+
+.img-wrapper,
+.wpslash-skroutz-courier {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    flex: 1;
+}
+
+span.img-wrapper img {
+	border-radius: 4px;
+	margin-right: 5px!important;
+}
+
+.column-wpslash_skroutz_smart_cart .row:not(:first-child) {
+	margin-top: 6px;
+}
+
+a.button.wpslash-skroutz-print-voucher,
+a.button.wpslash-skroutz-toggle-accept-order,
+a.button.wpslash-skroutz-toggle-reject-order,
+a.button.wpslash-skroutz-toggle-invoice-order {
+	text-align: center;
+    white-space: normal;
+line-height: 16px;
+padding-top: 2px;
+padding-bottom: 2px;
+margin-bottom: 3px;
+}
+
+a.button.wpslash-skroutz-toggle-accept-order {
+    background: #3bb13b;
+    border-color: #007a00;
+    color: #ffffff;
+}
+
+a.button.wpslash-skroutz-toggle-accept-order:hover {
+		background: #039903;
+	 color: #ffffff;
+	  border-color: #007a00;
+}
+
+a.button.wpslash-skroutz-toggle-reject-order {
+    background: #ff4545;
+    border-color: #bf0000;
+    color: white;
+
+}
+
+a.button.wpslash-skroutz-toggle-reject-order:hover {
+	background: #e92828;
+	color: #ffffff;
+	border-color: #bf0000;
+}
+
+a.button.wpslash-skroutz-toggle-invoice-order {
+    background: #e7ecf7;
+}
+
+.wpslash-skroutz-tracking-code,
+.wpslash-skroutz-courier,
+.wpslash-skroutz-status,
+.img-wrapper img {
+    cursor: initial;
+}
+
+span.img-wrapper a:hover {
+	color: black;
+}

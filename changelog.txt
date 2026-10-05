@@ -1,0 +1,27 @@
+*** Skroutz MarketPlace & XML for WooCommerce Changelog ***
+2024-06-10 - version 1.1.1
+* Fixed HPOS Query Issues
+2023-09-11 - version 1.1.0
+* Fixed Auto-Accepting Issue
+2023-05-18 - version 1.0.9
+* Added COT Compatibility
+* Added Attribute Support as MPN Field
+2022-12-13 - version 1.0.8
+* Fix Settings Handling
+2022-12-07 - version 1.0.7
+* Fix SKU on Variable Products
+2022-12-07 - version 1.0.6
+* Fix Stock Management Checking on Feed Builder
+2022-11-23 - version 1.0.5
+* Fix XML MPN Field Formation
+2022-11-16 - version 1.0.4
+* Added Compatibility for 3rd Party XML Skroutz Plugins
+2022-11-09 - version 1.0.3
+* Rename Plugin
+2022-08-16 - version 1.0.2
+* Fixed Skroutz Order Status 
+2022-08-12 - version 1.0.1
+* Fixed WC Checking
+* Added Admin Notice on WC Checking
+2022-07-14 - version 1.0.0
+* Inital release
