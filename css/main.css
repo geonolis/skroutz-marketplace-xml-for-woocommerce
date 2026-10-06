@@ -149,24 +149,26 @@ margin-top: 6px;
 .wp-list-table td.column-skroutz_smart_cart,
 .wp-list-table td.column-wpslash_skroutz_smart_cart,
 .wp-list-table td.skroutz_smart_cart {
-	padding-left: 4px !important;
-	padding-right: 4px !important;
+	padding-left: 6px !important;
+	padding-right: 6px !important;
 	vertical-align: middle;
 	font-size: 10.5px;
 	line-height: 1.25;
+	width: 140px;
+	min-width: 135px;
 }
 
 .post-type-shop_order .wp-list-table tbody td.column-skroutz_smart_cart:last-child,
 .post-type-shop_order .wp-list-table tbody td.column-wpslash_skroutz_smart_cart:last-child,
 .post-type-shop_order .wp-list-table tbody td.skroutz_smart_cart:last-child {
-	padding-right: 4px !important;
+	padding-right: 6px !important;
 }
 
 @media screen and (min-width: 1440px){
 	#skroutz_smart_cart,
 	#wpslash_skroutz_smart_cart {
-		min-width: 95px;
-		width: 11ch;
+		min-width: 140px;
+		width: 15ch;
 	}
 }
 
