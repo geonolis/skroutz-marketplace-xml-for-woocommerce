@@ -213,14 +213,15 @@ td.skroutz_smart_cart .column.half {
 	width: 100%;
 }
 
+.wp-core-ui a.button.skroutz-print-voucher,
 a.button.skroutz-print-voucher {
 	display: block;
 	width: 100%;
 	max-width: 100%;
 	box-sizing: border-box;
-	padding: 1px 3px !important;
+	padding: 1px 8px !important;
 	font-size: 10px !important;
-	line-height: 18px !important;
+	line-height: 2 !important;
 	min-height: 20px !important;
 	height: auto !important;
 	text-align: center;
@@ -238,6 +239,9 @@ a.button.skroutz-print-voucher {
 	font-style: italic;
 }
 
+.wp-core-ui a.button.skroutz-toggle-accept-order,
+.wp-core-ui a.button.skroutz-toggle-reject-order,
+.wp-core-ui a.button.skroutz-toggle-invoice-order,
 a.button.skroutz-toggle-accept-order,
 a.button.skroutz-toggle-reject-order,
 a.button.skroutz-toggle-invoice-order {

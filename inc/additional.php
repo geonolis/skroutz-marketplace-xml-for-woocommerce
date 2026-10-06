@@ -8,14 +8,24 @@ function skroutz_smart_cart_enqueue_styles( $hook ) {
 
 	global $typenow;
 
-	if ( ( 'shop_order' === $typenow ) || ( 'woocommerce_page_wc-orders' === $typenow ) ) {
+	$screen    = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+	$screen_id = $screen ? $screen->id : '';
 
-		wp_enqueue_style('skroutz-smart-cart-css', WPSSSC_DIR_URL . '/css/main.css', array(), '1.1.0', 'all');
-		wp_enqueue_script('skroutz-smart-cart-js', WPSSSC_DIR_URL . '/js/main.js', array( 'jquery' ), '0.1.0', true);
+	$is_order_screen = (
+		'shop_order' === $typenow
+		|| 'woocommerce_page_wc-orders' === $hook
+		|| 'woocommerce_page_wc-orders' === $screen_id
+		|| ( $screen && in_array( $screen->id, array( 'shop_order', 'edit-shop_order', 'woocommerce_page_wc-orders' ), true ) )
+	);
+
+	if ( $is_order_screen ) {
+
+		wp_enqueue_style( 'skroutz-smart-cart-css', WPSSSC_DIR_URL . 'css/main.css', array(), '1.1.2', 'all' );
+		wp_enqueue_script( 'skroutz-smart-cart-js', WPSSSC_DIR_URL . 'js/main.js', array( 'jquery' ), '0.1.1', true );
 		wp_localize_script( 'skroutz-smart-cart-js', 'skroutz_smart_cart_order_obj',
 			array( 
-				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				'security' => wp_create_nonce('skroutz_smart_cart_order_security'),
+				'ajaxurl'  => admin_url( 'admin-ajax.php' ),
+				'security' => wp_create_nonce( 'skroutz_smart_cart_order_security' ),
 			)
 		);
 	}
