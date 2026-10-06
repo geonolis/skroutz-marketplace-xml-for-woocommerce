@@ -4,9 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-	add_action( 'woocommerce_settings_tabs', 'wpslash_skroutz_smart_cart_add_settings_tab' );
+	add_action( 'woocommerce_settings_tabs', 'skroutz_smart_cart_add_settings_tab' );
 // phpcs:disable WordPress.Security.NonceVerification.Recommended
-function wpslash_skroutz_smart_cart_add_settings_tab() {
+function skroutz_smart_cart_add_settings_tab() {
 
 		$current_tab =  '';
 	if (isset($_GET['tab'])) {
@@ -16,18 +16,18 @@ function wpslash_skroutz_smart_cart_add_settings_tab() {
 	//echo '<a href="admin.php?page=wc-settings&amp;tab=wpslash_skroutz_smart_cart" class="nav-tab ' . esc_html($current_tab) . '">' . esc_html__( 'Skroutz Smart Cart', 'skroutz-marketplace-xml-for-woocommerce' ) . '</a>';
 }
 
-add_filter( 'woocommerce_settings_tabs_array', 'wpslash_skroutz_smart_cart_woocommerce_settings_tabs_array_filter' );
+add_filter( 'woocommerce_settings_tabs_array', 'skroutz_smart_cart_woocommerce_settings_tabs_array_filter' );
 
 
-function wpslash_skroutz_smart_cart_woocommerce_settings_tabs_array_filter( $array ) {
+function skroutz_smart_cart_woocommerce_settings_tabs_array_filter( $array ) {
 
 	$array['wpslash_skroutz_smart_cart'] = esc_html__( 'Skroutz Smart Cart', 'skroutz-marketplace-xml-for-woocommerce' );
 	return $array;
 }
 
 
-	add_action( 'woocommerce_settings_wpslash_skroutz_smart_cart', 'wpslash_skroutz_smart_cart_tab_content' );
-function wpslash_skroutz_smart_cart_tab_content() { 
+	add_action( 'woocommerce_settings_wpslash_skroutz_smart_cart', 'skroutz_smart_cart_tab_content' );
+function skroutz_smart_cart_tab_content() { 
 
 	?>
 		<ul class="subsubsub">
@@ -60,13 +60,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-		woocommerce_admin_fields( wpslash_skroutz_smart_cart_tab_content_get_settings() );
-		woocommerce_admin_fields( wpslash_skroutz_smart_cart_xml_content_get_settings() );
+		woocommerce_admin_fields( skroutz_smart_cart_tab_content_get_settings() );
+		woocommerce_admin_fields( skroutz_smart_cart_xml_content_get_settings() );
 }
 
 
 
-function wpslash_skroutz_smart_cart_tab_content_get_settings() {
+function skroutz_smart_cart_tab_content_get_settings() {
 	if ( ( isset($_GET['section']) && 'smart_cart' === $_GET['section'] ) || !isset($_GET['section']) ) {
 		$settings = array(
 		'section_title' => array(
@@ -113,7 +113,7 @@ function wpslash_skroutz_smart_cart_tab_content_get_settings() {
 		'type' => 'select',
 		'desc' => esc_html__('Select the Custom Field', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_unique_id_custom_field',
-		'options' => wpslash_skroutz_smart_cart_product_meta_helper(),
+		'options' => skroutz_smart_cart_product_meta_helper(),
 		),
 
 
@@ -149,16 +149,16 @@ function wpslash_skroutz_smart_cart_tab_content_get_settings() {
 			
 		'section_end' => array(
 		'type' => 'sectionend',
-		'id' => 'wc_settings_tab_WPSlash_Tipping_section_end',
+		'id' => 'wc_settings_tab_skroutz_smart_cart_section_end',
 		),
 		);
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
-		return apply_filters( 'wc_settings_tab_wpslash_smart_cart_settings', $settings );
+		return apply_filters( 'wc_settings_tab_skroutz_smart_cart_settings', apply_filters( 'wc_settings_tab_wpslash_smart_cart_settings', $settings ) );
 	}
 }
 
 
-function wpslash_skroutz_smart_cart_xml_content_get_settings() {
+function skroutz_smart_cart_xml_content_get_settings() {
 	if ( ( isset($_GET['section']) && 'xml_feed' === $_GET['section'] ) || !isset($_GET['section']) ) {
 
 
@@ -200,7 +200,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'select',
 		'desc' => esc_html__('Select the Custom Field you want to use as Unique ID ', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_unique_id_custom_field',
-		'options' => wpslash_skroutz_smart_cart_product_meta_helper(),
+		'options' => skroutz_smart_cart_product_meta_helper(),
 		),
 
 					'brand_attribute' => array(
@@ -208,7 +208,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'select',
 		'desc' => esc_html__('Select the Taxonomy you are using for Brand.', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_brand_tax',
-		'options' => wpslash_skroutz_smart_cart_brand_helper(),
+		'options' => skroutz_smart_cart_brand_helper(),
 		),
 
 		'sku_field' => array(
@@ -230,7 +230,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'select',
 		'desc' => esc_html__('Select the Attribute you will use as SKU', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_sku_attribute_field',
-		'options' => wpslash_skroutz_smart_cart_attributes_helper(),
+		'options' => skroutz_smart_cart_attributes_helper(),
 		),
 			
 
@@ -240,7 +240,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'select',
 		'desc' => esc_html__('Select Custom field you will use as MPN', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_sku_custom_field',
-		'options' => wpslash_skroutz_smart_cart_product_meta_helper(),
+		'options' => skroutz_smart_cart_product_meta_helper(),
 		'default'=> '',
 
 		),
@@ -251,7 +251,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'select',
 		'desc' => esc_html__('Select EAN field meta key. Its required for Electronic Stores. ', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_ean_field',
-		'options' => wpslash_skroutz_smart_cart_product_meta_helper(),
+		'options' => skroutz_smart_cart_product_meta_helper(),
 		'default'=> '',
 
 		),
@@ -261,7 +261,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'multiselect',
 		'desc' => esc_html__('Select Product Categories that require EAN Code. Leave it empty if EAN is not required. Products without EAN on the Selected Categories will be not included in XML Feed', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_ean_required_cats',
-		'options' => wpslash_skroutz_smart_cart_categories_helper('product_cat'),
+		'options' => skroutz_smart_cart_categories_helper('product_cat'),
 
 		),
 
@@ -271,7 +271,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'multiselect',
 		'desc' => esc_html__('Select Size Attribute. Required for fashion/clothing stores. ', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_size_field',
-		'options' => wpslash_skroutz_smart_cart_attributes_helper(),
+		'options' => skroutz_smart_cart_attributes_helper(),
 		'default'=> '',
 
 		),
@@ -281,7 +281,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'multiselect',
 		'desc' => esc_html__('Select Color Attribute. Required for fashion/clothing stores. ', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_color_field',
-		'options' => wpslash_skroutz_smart_cart_attributes_helper(),
+		'options' => skroutz_smart_cart_attributes_helper(),
 		'default'=> '',
 
 		),
@@ -292,7 +292,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'select',
 		'desc' => esc_html__('The default Product Availability for inStock Products', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_default_availability_in_stock',
-		'options' => wpslash_skroutz_smart_cart_get_availabilities(),
+		'options' => skroutz_smart_cart_get_availabilities(),
 		'default'=> 'instock',
 
 		),
@@ -302,7 +302,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'select',
 		'desc' => esc_html__('The default Product Availability for BackOrder Products', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_default_availability_backorder',
-		'options' => wpslash_skroutz_smart_cart_get_availabilities(),
+		'options' => skroutz_smart_cart_get_availabilities(),
 		'default'=> 'backorder',
 
 		),
@@ -311,7 +311,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'select',
 		'desc' => esc_html__('Select an attribute you are using as Availability Status for Skroutz XML Feed. This will overwrite the default availability you have set for Skroutz.', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_overwrite_availability',
-		'options' => wpslash_skroutz_smart_cart_attributes_helper(),
+		'options' => skroutz_smart_cart_attributes_helper(),
 		'default'=> '',
 
 		),
@@ -320,7 +320,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 
 		'section_end_initial' => array(
 		'type' => 'sectionend',
-		'id' => 'wc_settings_tab_WPSlash_Tipping_section_end_first_part',
+		'id' => 'wc_settings_tab_skroutz_smart_cart_section_end_first_part',
 		),
 
 				'section_start_shipping' => array(
@@ -366,7 +366,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'multiselect',
 		'desc' => esc_html__('Select Product Categories from  products you want to be included in feed', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_included_cats',
-		'options' => wpslash_skroutz_smart_cart_categories_helper('product_cat'),
+		'options' => skroutz_smart_cart_categories_helper('product_cat'),
 		//'default'=> 'instock'
 
 		),
@@ -377,7 +377,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'multiselect',
 		'desc' => esc_html__('Select Tags from products you want to be included in feed', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_included_tags',
-		'options' => wpslash_skroutz_smart_cart_categories_helper('product_tag'),
+		'options' => skroutz_smart_cart_categories_helper('product_tag'),
 		//'default'=> 'instock'
 
 		),
@@ -391,12 +391,12 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'multiselect',
 		'desc' => esc_html__('Select Brands from products you want to be included in feed', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_included_brands',
-		'options' => wpslash_skroutz_smart_cart_categories_helper(get_option('wc_settings_tab_wpslash_smart_cart_feed_brand_tax', 'notselectedbrand')),
+		'options' => skroutz_smart_cart_categories_helper(get_option('wc_settings_tab_wpslash_smart_cart_feed_brand_tax', 'notselectedbrand')),
 		),
 
 		'section_end_inclusions' => array(
 		'type' => 'sectionend',
-		'id' => 'wc_settings_tab_WPSlash_Tipping_section_end_inclusions',
+		'id' => 'wc_settings_tab_skroutz_smart_cart_section_end_inclusions',
 		),
 
 
@@ -412,7 +412,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'multiselect',
 		'desc' => esc_html__('Select Product Categories you want to not appear in feed', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_exluded_cats',
-		'options' => wpslash_skroutz_smart_cart_categories_helper('product_cat'),
+		'options' => skroutz_smart_cart_categories_helper('product_cat'),
 
 		),
 
@@ -422,7 +422,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'multiselect',
 		'desc' => esc_html__('Select Tags you want to not appear in feed', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_exluded_tags',
-		'options' => wpslash_skroutz_smart_cart_categories_helper('product_tag'),
+		'options' => skroutz_smart_cart_categories_helper('product_tag'),
 
 		),
 
@@ -435,7 +435,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'multiselect',
 		'desc' => esc_html__('Select Brands from products you want to not be included in feed', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_feed_excluded_brands',
-		'options' => wpslash_skroutz_smart_cart_categories_helper(get_option('wc_settings_tab_wpslash_smart_cart_feed_brand_tax', 'notselectedbrand')),
+		'options' => skroutz_smart_cart_categories_helper(get_option('wc_settings_tab_wpslash_smart_cart_feed_brand_tax', 'notselectedbrand')),
 		),
 
 		'excluded_backorder' => array(
@@ -448,7 +448,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 
 			'section_end_exclusions' => array(
 		'type' => 'sectionend',
-		'id' => 'wc_settings_tab_WPSlash_Tipping_section_end_exclusions',
+		'id' => 'wc_settings_tab_skroutz_smart_cart_section_end_exclusions',
 		),
 			'section_generation_title' => array(
 		'title'     => __( 'Feed Generation', 'skroutz-marketplace-xml-for-woocommerce' ),
@@ -510,7 +510,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 			
 		'section_end' => array(
 		'type' => 'sectionend',
-		'id' => 'wc_settings_tab_WPSlash_Tipping_section_end',
+		'id' => 'wc_settings_tab_skroutz_smart_cart_section_end',
 		),
 
 
@@ -580,7 +580,7 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'select',
 		'desc' => esc_html__('Select if you want to add a new image field where you can assign the transparent/white background product image or if you already using an other custom field.', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_alternate_image_custom_field',
-		'options' => wpslash_skroutz_smart_cart_product_meta_helper(),
+		'options' => skroutz_smart_cart_product_meta_helper(),
 		'default'=> '',
 		),
 
@@ -589,34 +589,36 @@ function wpslash_skroutz_smart_cart_xml_content_get_settings() {
 		'type' => 'select',
 		'desc' => esc_html__('Select if you want to add a new image field where you can assign the transparent/white background product image or if you already using an other custom field.', 'skroutz-marketplace-xml-for-woocommerce'),
 		'id' => 'wc_settings_tab_wpslash_smart_cart_alternate_image_custom_field_variations',
-		'options' => wpslash_skroutz_smart_cart_product_variations_meta_helper(),
+		'options' => skroutz_smart_cart_product_variations_meta_helper(),
 		'default'=> '',
 		),
 			'section_tweaks_end' => array(
 		'type' => 'sectionend',
-		'id' => 'wc_settings_tab_WPSlash_Tipping_section_tweaks_end',
+		'id' => 'wc_settings_tab_skroutz_smart_cart_section_tweaks_end',
 		),
 		);
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
-		return apply_filters( 'wc_settings_tab_wpslash_smart_cart_settings', $settings );
+		return apply_filters( 'wc_settings_tab_skroutz_smart_cart_settings', apply_filters( 'wc_settings_tab_wpslash_smart_cart_settings', $settings ) );
 	}
 }
 
 
-	add_action('woocommerce_settings_save_wpslash_skroutz_smart_cart', 'wpslash_save_skroutz_smart_cart_settings');
+	add_action('woocommerce_settings_save_wpslash_skroutz_smart_cart', 'skroutz_save_smart_cart_settings');
 
-function wpslash_save_skroutz_smart_cart_settings() {
+function skroutz_save_smart_cart_settings() {
 
 	if ( ( isset($_GET['section']) && 'smart_cart' === $_GET['section'] ) || !isset($_GET['section']) ) {
-		woocommerce_update_options( wpslash_skroutz_smart_cart_tab_content_get_settings() );
+		woocommerce_update_options( skroutz_smart_cart_tab_content_get_settings() );
 	}
 	if ( ( isset($_GET['section']) && 'xml_feed' === $_GET['section'] ) || !isset($_GET['section']) ) {
-		woocommerce_update_options( wpslash_skroutz_smart_cart_xml_content_get_settings() );
+		woocommerce_update_options( skroutz_smart_cart_xml_content_get_settings() );
 	}
 
 	$disable_xml_update = get_option('wc_settings_tab_wpslash_smart_cart_disable_xml_update', 'no');
 
 	if ( 'yes' === $disable_xml_update ) {
+		wp_clear_scheduled_hook( 'skroutz_smart_cart_feed_scheduled_task_second' );
+		wp_clear_scheduled_hook( 'skroutz_smart_cart_feed_scheduled_task' );
 		wp_clear_scheduled_hook( 'wpslash_smart_cart_feed_scheduled_task_second' );
 		wp_clear_scheduled_hook( 'wpslash_smart_cart_feed_scheduled_task' );
 		update_option('wpslash_smart_cart_feed_xml_is_running', false);
@@ -624,11 +626,12 @@ function wpslash_save_skroutz_smart_cart_settings() {
 		update_option('wpslash_smart_cart_feed_xml_total_pages', 0);
 		update_option('wpslash_smart_cart_feed_xml_current_page', 0);
 	} else {
+		wp_clear_scheduled_hook( 'skroutz_smart_cart_feed_scheduled_task_second' );
 		wp_clear_scheduled_hook( 'wpslash_smart_cart_feed_scheduled_task_second' );
 		update_option('wpslash_smart_cart_feed_xml_is_running', false);
 		update_option('wpslash_smart_cart_feed_xml_total_pages', 0);
 		update_option('wpslash_smart_cart_feed_xml_current_page', 0);
-		wp_schedule_event(time(), 'every_five_seconds', 'wpslash_smart_cart_feed_scheduled_task_second');
+		wp_schedule_event(time(), 'every_five_seconds', 'skroutz_smart_cart_feed_scheduled_task_second');
 		$upload_dir = wp_upload_dir();
 		if ( file_exists( $upload_dir['basedir'] . '/tempskroutz.xml' ) ) {
 			wp_delete_file($upload_dir['basedir'] . '/tempskroutz.xml');

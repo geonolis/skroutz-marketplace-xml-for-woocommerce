@@ -4,9 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-add_action('wp_ajax_wpslash_skroutz_smart_cart_load_order', 'wpslash_skroutz_smart_cart_load_order');
-function wpslash_skroutz_smart_cart_load_order() {
-	check_ajax_referer('wpslash_skroutz_smart_cart_order_security', 'security');
+add_action('wp_ajax_skroutz_smart_cart_load_order', 'skroutz_smart_cart_load_order');
+function skroutz_smart_cart_load_order() {
+	check_ajax_referer('skroutz_smart_cart_order_security', 'security');
 
 	if (isset($_POST['order_id'])) {
 		$order_id = intval( wp_unslash( $_POST['order_id'] ) );
@@ -34,9 +34,9 @@ function wpslash_skroutz_smart_cart_load_order() {
 	wp_die();
 }
 
-add_action('wp_ajax_wpslash_skroutz_smart_cart_reject_order', 'wpslash_skroutz_smart_cart_reject_order');
-function wpslash_skroutz_smart_cart_reject_order() {
-	check_ajax_referer('wpslash_skroutz_smart_cart_order_security', 'security');
+add_action('wp_ajax_skroutz_smart_cart_reject_order', 'skroutz_smart_cart_reject_order');
+function skroutz_smart_cart_reject_order() {
+	check_ajax_referer('skroutz_smart_cart_order_security', 'security');
 
 	if (isset($_POST['order_id'])) {
 		$order_id = intval( wp_unslash( $_POST['order_id'] ) );
@@ -87,9 +87,9 @@ function wpslash_skroutz_smart_cart_reject_order() {
 	wp_die();
 }
 
-add_action('wp_ajax_wpslash_skroutz_smart_cart_accept_order', 'wpslash_skroutz_smart_cart_accept_order');
-function wpslash_skroutz_smart_cart_accept_order() {
-	check_ajax_referer('wpslash_skroutz_smart_cart_order_security', 'security');
+add_action('wp_ajax_skroutz_smart_cart_accept_order', 'skroutz_smart_cart_accept_order');
+function skroutz_smart_cart_accept_order() {
+	check_ajax_referer('skroutz_smart_cart_order_security', 'security');
 
 	$api_token  = get_option( 'wc_settings_tab_wpslash_smart_cart_api_token', false );
 
@@ -147,14 +147,14 @@ function wpslash_skroutz_smart_cart_accept_order() {
 	wp_die();
 }
 
-add_action('wp_ajax_wpslash_skroutz_smart_cart_refresh_shoporder', 'wpslash_skroutz_smart_cart_refresh_shoporder');
-function wpslash_skroutz_smart_cart_refresh_shoporder() {
-	check_ajax_referer('wpslash_skroutz_smart_cart_order_security', 'security');
+add_action('wp_ajax_skroutz_smart_cart_refresh_shoporder', 'skroutz_smart_cart_refresh_shoporder');
+function skroutz_smart_cart_refresh_shoporder() {
+	check_ajax_referer('skroutz_smart_cart_order_security', 'security');
 
 	if (isset($_POST['order_id'])) {
 		$order_id = intval( wp_unslash( $_POST['order_id'] ) );
 		ob_start();
-		wpslash_skroutz_smart_cart_shoporder($order_id);
+		skroutz_smart_cart_shoporder($order_id);
 		$html_data = ob_get_clean();
 
 		$response = array( 'success'=>true, 'order_id'=>$order_id, 'html'=>$html_data );

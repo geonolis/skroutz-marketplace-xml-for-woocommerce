@@ -3,9 +3,11 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-function wpslash_skroutz_feed_builder_output() {
+function skroutz_feed_builder_output() {
 
 	if ( 'yes' === get_option( 'wc_settings_tab_wpslash_smart_cart_disable_xml_update', 'no' ) ) {
+		wp_clear_scheduled_hook( 'skroutz_smart_cart_feed_scheduled_task_second' );
+		wp_clear_scheduled_hook( 'skroutz_smart_cart_feed_scheduled_task' );
 		wp_clear_scheduled_hook( 'wpslash_smart_cart_feed_scheduled_task_second' );
 		wp_clear_scheduled_hook( 'wpslash_smart_cart_feed_scheduled_task' );
 		update_option( 'wpslash_smart_cart_feed_xml_is_running', false );
@@ -31,7 +33,7 @@ $feed_processing_now =  false;*/
 
 
 $split_color_variations  = get_option('wc_settings_tab_wpslash_smart_cart_split_color_variations', 'no');  
-$all_availabilties = wpslash_skroutz_smart_cart_get_availabilities();
+$all_availabilties = skroutz_smart_cart_get_availabilities();
 
 $alternate_skroutz_image  = get_option('wc_settings_tab_wpslash_smart_cart_alternate_image', 'no');  
 $alternate_create_field  = get_option('wc_settings_tab_wpslash_smart_cart_alternate_image_create_field', 'yes');  
@@ -148,9 +150,9 @@ $shipping_additional_kg_cost = get_option('wc_settings_tab_wpslash_smart_cart_fe
 
 			$feed_generation_is_running = true;
 
-			if ($feed_generation_is_running && ( !wp_next_scheduled('wpslash_smart_cart_feed_scheduled_task_second') )) {
+			if ($feed_generation_is_running && ( !wp_next_scheduled('skroutz_smart_cart_feed_scheduled_task_second') )) {
 				if ( 'yes' !== get_option( 'wc_settings_tab_wpslash_smart_cart_disable_xml_update', 'no' ) ) {
-					wp_schedule_event(time(), 'every_five_seconds', 'wpslash_smart_cart_feed_scheduled_task_second');
+					wp_schedule_event(time(), 'every_five_seconds', 'skroutz_smart_cart_feed_scheduled_task_second');
 				}
 			}
 
@@ -173,6 +175,7 @@ $shipping_additional_kg_cost = get_option('wc_settings_tab_wpslash_smart_cart_fe
 		update_option('wpslash_smart_cart_feed_xml_current_page', $current_page);
 
 
+		// phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 		$args = array( 'post_type' => 'product', 'posts_per_page' => 100, 'post_status'=>'publish', 'paged'=>$current_page, 'tax_query'=>array() );
 
 
@@ -274,6 +277,7 @@ $shipping_additional_kg_cost = get_option('wc_settings_tab_wpslash_smart_cart_fe
 			);
 
 		}
+		// phpcs:enable WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 
 
 
@@ -1007,6 +1011,7 @@ $term = get_terms( array( 'taxonomy'=> $color_field, 'fields' => 'names', 'slug'
 
 		if ( ( $current_page == $total_pages ) || ( 0 == $total_pages ) ) {
 
+			wp_clear_scheduled_hook( 'skroutz_smart_cart_feed_scheduled_task_second' );
 			wp_clear_scheduled_hook( 'wpslash_smart_cart_feed_scheduled_task_second' );
 			update_option('wpslash_smart_cart_feed_xml_is_running', false);
 			update_option('wpslash_smart_cart_feed_xml_total_pages', 0);

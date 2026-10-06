@@ -17,8 +17,8 @@ jQuery(document).ready(function()
 		jQuery('#wc_settings_tab_wpslash_smart_cart_alternate_image_custom_field_variation').select2();
 
 
-		var wpslash_alternate_field =  jQuery('#wc_settings_tab_wpslash_smart_cart_alternate_image :checked').val();
-		if(!wpslash_alternate_field)
+		var skroutz_alternate_field =  jQuery('#wc_settings_tab_wpslash_smart_cart_alternate_image :checked').val();
+		if(!skroutz_alternate_field)
 		{
 			jQuery('#wc_settings_tab_wpslash_smart_cart_alternate_image_create_field').parent().parent().css("display", "none");
 		    jQuery('#wc_settings_tab_wpslash_smart_cart_alternate_image_custom_field').parent().parent().css("display", "none");
@@ -28,16 +28,16 @@ jQuery(document).ready(function()
 
 		}
 
-		var wpslash_unique_id_filed =  jQuery('#wc_settings_tab_wpslash_smart_cart_feed_unique_id :checked').val();
+		var skroutz_unique_id_field =  jQuery('#wc_settings_tab_wpslash_smart_cart_feed_unique_id :checked').val();
 
-	if(wpslash_unique_id_filed =="custom_field")
+	if(skroutz_unique_id_field =="custom_field")
 		{
 		 
 						jQuery('#wc_settings_tab_wpslash_smart_cart_unique_id_custom_field').parent().parent().css("display", "table-row");
 
 
 		}
-		else if(wpslash_unique_id_filed =="attribute")
+		else if(skroutz_unique_id_field =="attribute")
 		{
 				jQuery('#wc_settings_tab_wpslash_smart_cart_unique_id_attribute_field').parent().parent().css("display", "table-row");
 
@@ -52,9 +52,9 @@ jQuery(document).ready(function()
 
 
 
-		var wpslash_unique_id_filed_cart =  jQuery('#wc_settings_tab_wpslash_smart_cart_unique_id :checked').val();
+		var skroutz_unique_id_field_cart =  jQuery('#wc_settings_tab_wpslash_smart_cart_unique_id :checked').val();
 
-	if(wpslash_unique_id_filed_cart !="custom_field")
+	if(skroutz_unique_id_field_cart !="custom_field")
 		{
 			jQuery('#wc_settings_tab_wpslash_smart_cart_unique_id_custom_field').parent().parent().css("display", "none");
 		 
@@ -68,9 +68,9 @@ jQuery(document).ready(function()
 		}
 
 
-var wc_settings_tab_wpslash_smart_cart_feed_sku_field =  jQuery('#wc_settings_tab_wpslash_smart_cart_feed_sku_field :checked').val();
+var skroutz_feed_sku_field =  jQuery('#wc_settings_tab_wpslash_smart_cart_feed_sku_field :checked').val();
 
-	if(wc_settings_tab_wpslash_smart_cart_feed_sku_field =="custom_field")
+	if(skroutz_feed_sku_field =="custom_field")
 		{
 
 			jQuery('#wc_settings_tab_wpslash_smart_cart_feed_sku_custom_field').parent().parent().css("display", "table-row");
@@ -79,7 +79,7 @@ var wc_settings_tab_wpslash_smart_cart_feed_sku_field =  jQuery('#wc_settings_ta
 
 
 		}
-		else if(wc_settings_tab_wpslash_smart_cart_feed_sku_field =="attribute")
+		else if(skroutz_feed_sku_field =="attribute")
 		{
 			
 			jQuery('#wc_settings_tab_wpslash_smart_cart_feed_sku_attribute_field').parent().parent().css("display", "table-row");

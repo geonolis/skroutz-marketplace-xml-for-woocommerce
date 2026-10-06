@@ -6,14 +6,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	use Automattic\WooCommerce\Utilities\OrderUtil;
 
 //add skroutz markatplace payment way
-add_filter('woocommerce_payment_gateways', 'wpslash_add_skroutz_gateway_class');
-function wpslash_add_skroutz_gateway_class($gateways) {
+add_filter('woocommerce_payment_gateways', 'skroutz_add_gateway_class');
+function skroutz_add_gateway_class($gateways) {
     $gateways[] = 'WC_Gateway_Skroutz_Marketplace';
     return $gateways;
 }
 
-add_action('plugins_loaded', 'wpslash_init_skroutz_gateway_class');
-function wpslash_init_skroutz_gateway_class() {
+add_action('plugins_loaded', 'skroutz_init_gateway_class');
+function skroutz_init_gateway_class() {
 
     class WC_Gateway_Skroutz_Marketplace extends WC_Payment_Gateway {
 
@@ -37,7 +37,7 @@ function wpslash_init_skroutz_gateway_class() {
 
 //αρχικό πλαγίν
 
-function wpslash_smart_cart_order_process_order( $skroutz_order_data ) {
+function skroutz_smart_cart_order_process_order( $skroutz_order_data ) {
 $unique_id = get_option( 'wc_settings_tab_wpslash_smart_cart_unique_id', 'id' );
 $unique_id_custom_field = get_option( 'wc_settings_tab_wpslash_smart_cart_unique_id_custom_field', '' );
 
@@ -218,7 +218,7 @@ $order['changes'] = $skroutz_order_data['changes'];
 
 
 		if ('custom_field' ==  $unique_id) {
-		 $product_id = wpslash_get_product_id_by_custom_field($item['shop_uid']);
+		 $product_id = skroutz_get_product_id_by_custom_field($item['shop_uid']);
 		 $product = wc_get_product($product_id);
 			if ($product) {
 			
@@ -272,7 +272,7 @@ return $order;
 }
 
 
-function wpslash_smart_cart_create_order( $data ) {
+function skroutz_smart_cart_create_order( $data ) {
 
 
 $orders = array();
@@ -282,6 +282,7 @@ $orders = array();
 
 		$orders = wc_get_orders(
 		array(
+		// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 		'meta_query' => array(
 			array(
 								'key' => 'wpslash_skroutz_smart_cart_order_code',
@@ -416,7 +417,6 @@ $orders = array();
 			 $order->update_meta_data( 'wpslash_skroutz_smart_cart_order_invoice_city', $data['invoice_city'] );
 			 $order->update_meta_data( 'wpslash_skroutz_smart_cart_order_invoice_region', $data['invoice_region'] );
 
-			 //DSDC ADDITIONS
 			 $order->update_meta_data( '_billing_timologio', 'Y' );
 			 
 			
@@ -465,8 +465,8 @@ $orders = array();
 		}
 	$order_id = $order->save();
 
-	$wc_settings_tab_wpslash_smart_cart_auto_accept = get_option('wc_settings_tab_wpslash_smart_cart_auto_accept', false);
-		if ('yes' == $wc_settings_tab_wpslash_smart_cart_auto_accept) {
+	$skroutz_auto_accept = get_option('wc_settings_tab_wpslash_smart_cart_auto_accept', false);
+		if ('yes' == $skroutz_auto_accept) {
 	
 
 		$skroutz_order = get_post_meta($order_id, 'wpslash_skroutz_smart_cart_order_code', true);
@@ -499,7 +499,7 @@ $orders = array();
 
 
 	} else {
-		wpslash_smart_cart_update_order( $data );
+		skroutz_smart_cart_update_order( $data );
 	}
 	
 	// Returns the order ID
@@ -507,7 +507,7 @@ $orders = array();
 }
 
 
-function wpslash_smart_cart_update_order( $data ) {
+function skroutz_smart_cart_update_order( $data ) {
 
 
 		/*  $orders = wc_get_orders( array( 'wpslash_skroutz_smart_cart_order_code' => $data['skroutz_data']['code'],     'return'        => 'ids' ) );
@@ -543,6 +543,7 @@ function wpslash_smart_cart_update_order( $data ) {
 
 			$orders = wc_get_orders(
 				array(
+					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 					'meta_query' => array(
 						array(
 							'key' => 'wpslash_skroutz_smart_cart_order_code',
@@ -646,7 +647,7 @@ function wpslash_smart_cart_update_order( $data ) {
 
 
 
-function wpslash_skroutz_smart_cart_shoporder( $order_id ) {
+function skroutz_smart_cart_shoporder( $order_id ) {
 		$order = wc_get_order($order_id);
 		$order_status = $order->get_status();
 		$skroutz_order = $order->get_meta( 'wpslash_skroutz_smart_cart_order', true);
@@ -689,8 +690,8 @@ function wpslash_skroutz_smart_cart_shoporder( $order_id ) {
 
 	<?php if ( ( 'yes' == $skroutz_order_accepted ) || ( 'cancelled' == $order_status ) ) : ?>
 			<div class="column">
-				<span class="wpslash-skroutz-status <?php echo esc_html($order_state); ?>">
-					<?php echo esc_html(wpslash_skroutz_smart_cart_states($order_state)); ?>
+				<span class="skroutz-status <?php echo esc_html($order_state); ?>">
+					<?php echo esc_html(skroutz_smart_cart_states($order_state)); ?>
 				</span>
 			</div>
 	</div><!-- END 1st ROW -->
@@ -700,13 +701,13 @@ function wpslash_skroutz_smart_cart_shoporder( $order_id ) {
 			<div class="row"><!-- START 2nd ROW -->
 				<div class="column">
 					<?php if (!empty($skroutz_courier)) : ?>
-						<span class="wpslash-skroutz-courier"><?php echo esc_html($skroutz_courier); ?></span>
+						<span class="skroutz-courier"><?php echo esc_html($skroutz_courier); ?></span>
 					<?php endif; ?>
 				</div>
 				<div class="column">
 					<?php if (!empty($skroutz_courier_tracking_codes)) : ?>
 						<?php foreach ($skroutz_courier_tracking_codes as $tracking_code) : ?>
-							<span class="wpslash-skroutz-tracking-code"><?php echo esc_html($tracking_code); ?></span>
+							<span class="skroutz-tracking-code"><?php echo esc_html($tracking_code); ?></span>
 						<?php endforeach; ?>
 					<?php endif; ?>
 				</div>
@@ -715,14 +716,14 @@ function wpslash_skroutz_smart_cart_shoporder( $order_id ) {
 			<?php if (!empty($skroutz_voucher) && ( 'cancelled' != $order_status ) ) : ?>
 				<div class="row"><!-- START 3rd ROW -->
 					<div class="column half">
-						<a class="button wpslash-skroutz-print-voucher" target="_blank" href="<?php echo esc_html($skroutz_voucher); ?>"><?php echo esc_html__('Print Voucher', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
+						<a class="button skroutz-print-voucher" target="_blank" href="<?php echo esc_html($skroutz_voucher); ?>"><?php echo esc_html__('Print Voucher', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
 					</div>
 				</div><!-- END 3rd ROW -->
 			<?php else : ?>
 				<?php if ('cancelled' != $order_status ) : ?>
 					<div class="row"><!-- START 3rd ROW -->
 						<div class="column half">
-							<span class="wpslash-skroutz-waiting-voucher"><?php esc_html_e('Voucher is not ready yet', 'skroutz-marketplace-xml-for-woocommerce'); ?></span>
+							<span class="skroutz-waiting-voucher"><?php esc_html_e('Voucher is not ready yet', 'skroutz-marketplace-xml-for-woocommerce'); ?></span>
 						</div>
 					</div><!-- END 3rd ROW -->
 				<?php endif; ?>
@@ -733,44 +734,44 @@ function wpslash_skroutz_smart_cart_shoporder( $order_id ) {
 		<?php if ('yes' == $skroutz_invoice) : ?>
 			<div class="row"><!-- START 4th ROW -->
 				<div class="column">
-					<a class="button wpslash-skroutz-toggle-invoice-order"><?php echo esc_html__('Invoice Details', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
+					<a class="button skroutz-toggle-invoice-order"><?php echo esc_html__('Invoice Details', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
 
-					<div class="wpslash_smart_cart_invoice_wrapper">
+					<div class="skroutz_smart_cart_invoice_wrapper">
 					
-						<div class="wpslash_smart_cart_field_wrapper">
+						<div class="skroutz_smart_cart_field_wrapper">
 						<label><?php esc_html_e('Company Name', 'skroutz-marketplace-xml-for-woocommerce'); ?></label>
 						<span><?php echo esc_html($skroutz_invoice_company); ?></span>
 						</div>
 
 
-						<div class="wpslash_smart_cart_field_wrapper">
+						<div class="skroutz_smart_cart_field_wrapper">
 						<label><?php esc_html_e('Profession', 'skroutz-marketplace-xml-for-woocommerce'); ?></label>
 						<span><?php echo esc_html($skroutz_invoice_profession); ?></span>
 						</div>
 
-						 <div class="wpslash_smart_cart_field_wrapper">
+						 <div class="skroutz_smart_cart_field_wrapper">
 						<label><?php esc_html_e('VAT', 'skroutz-marketplace-xml-for-woocommerce'); ?></label>
 						<span><?php echo esc_html($skroutz_invoice_vat); ?></span>
 						</div>
 
 
-						 <div class="wpslash_smart_cart_field_wrapper">
+						 <div class="skroutz_smart_cart_field_wrapper">
 						<label><?php esc_html_e('DOY', 'skroutz-marketplace-xml-for-woocommerce'); ?></label>
 						<span><?php echo esc_html($skroutz_invoice_doy); ?></span>
 						</div>
 
-						   <div class="wpslash_smart_cart_field_wrapper">
+						   <div class="skroutz_smart_cart_field_wrapper">
 						<label><?php esc_html_e('Address', 'skroutz-marketplace-xml-for-woocommerce'); ?></label>
 						<span><?php echo esc_html($skroutz_invoice_address); ?></span>
 						</div>
 
-						<div class="wpslash_smart_cart_field_wrapper">
+						<div class="skroutz_smart_cart_field_wrapper">
 						<label><?php esc_html_e('Zip', 'skroutz-marketplace-xml-for-woocommerce'); ?></label>
 						<span><?php echo esc_html($skroutz_invoice_zip); ?></span>
 						</div>
 
 
-						 <div class="wpslash_smart_cart_field_wrapper">
+						 <div class="skroutz_smart_cart_field_wrapper">
 						<label><?php esc_html_e('City', 'skroutz-marketplace-xml-for-woocommerce'); ?></label>
 						<span><?php echo esc_html($skroutz_invoice_city); ?></span>
 						</div>
@@ -783,7 +784,7 @@ function wpslash_skroutz_smart_cart_shoporder( $order_id ) {
 		<?php if ('yes' == $skroutz_gift_wrap) : ?>
 			<div class="row"><!-- START 5th ROW -->
 				<div class="column">
-					<span class="wpslash-skoutz-smart-cart-gift-wrap"><?php esc_html_e('Gift Wrap', 'skroutz-marketplace-xml-for-woocommerce'); ?></span>
+					<span class="skroutz-smart-cart-gift-wrap"><?php esc_html_e('Gift Wrap', 'skroutz-marketplace-xml-for-woocommerce'); ?></span>
 				</div>
 			</div><!-- END 5th ROW -->
 		<?php endif; ?>	
@@ -792,11 +793,11 @@ function wpslash_skroutz_smart_cart_shoporder( $order_id ) {
 			<div class="row"><!-- START 6th ROW -->
 				<div class="column">
 			
-					<a class="button wpslash-skroutz-toggle-accept-order"><?php echo esc_html__('Accept Order', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
+					<a class="button skroutz-toggle-accept-order"><?php echo esc_html__('Accept Order', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
 
-						<div class="wpslash_skroutz_accept_window">
+						<div class="skroutz_accept_window">
 							<label><?php esc_html_e('Pickup Location from', 'skroutz-marketplace-xml-for-woocommerce'); ?></label>
-							<select class="wpslash-skroutz-pickup-location">
+							<select class="skroutz-pickup-location">
 					<?php foreach ($skroutz_accept_options['pickup_location'] as $location) : ?>
 									<option value="<?php echo esc_html($location['id']); ?>"><?php echo esc_html($location['label']); ?></option>
 								<?php endforeach; ?>
@@ -804,7 +805,7 @@ function wpslash_skroutz_smart_cart_shoporder( $order_id ) {
 
 
 								<label><?php esc_html_e('Pickup Time', 'skroutz-marketplace-xml-for-woocommerce'); ?></label>
-							<select class="wpslash-skroutz-pickup-window">
+							<select class="skroutz-pickup-window">
 					<?php foreach ($skroutz_accept_options['pickup_window'] as $window) : ?>
 										<?php
 
@@ -831,20 +832,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 					?>
 							</select>
 
-							<a class="button wpslash-skroutz-accept-order" order-id="<?php echo esc_html($order_id); ?>"><?php echo esc_html__('Accept', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
+							<a class="button skroutz-accept-order" order-id="<?php echo esc_html($order_id); ?>"><?php echo esc_html__('Accept', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
 	
 						</div>
 
 				</div>
 				<div class="column">
-					<a class="button wpslash-skroutz-toggle-reject-order"><?php echo esc_html__('Reject Order', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
+					<a class="button skroutz-toggle-reject-order"><?php echo esc_html__('Reject Order', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
 
-						<div class="wpslash_skroutz_reject_window">
+						<div class="skroutz_reject_window">
 
 							<?php foreach ($skroutz_line_items as $skroutz_item) : ?>
 
 							<label><?php esc_html_e('Reject Reason', 'skroutz-marketplace-xml-for-woocommerce'); ?></label>
-							<select class="wpslash-skroutz-rejection-reason">
+							<select class="skroutz-rejection-reason">
 								<?php foreach ($skroutz_reject_options['line_item_rejection_reasons'] as $reject_option) : ?>
 									<option value="<?php echo esc_html($reject_option['id']); ?>" req-q="<?php echo esc_html($reject_option['requires_available_quantity']); ?>"><?php echo esc_html($reject_option['label']); ?></option>
 								<?php endforeach; ?>
@@ -852,12 +853,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 								<label><?php esc_html_e('Quantity', 'skroutz-marketplace-xml-for-woocommerce'); ?></label>
-								<input type="number" class="wpslash-skroutz-quantity" />
-								<input type="hidden" class="wpslash-skroutz-item-id" value="<?php echo esc_html($skroutz_item['id']); ?>" />
+								<input type="number" class="skroutz-quantity" />
+								<input type="hidden" class="skroutz-item-id" value="<?php echo esc_html($skroutz_item['id']); ?>" />
 
 								<?php endforeach; ?>
 
-							<a class="button wpslash-skroutz-reject-order" order-id="<?php echo esc_html($order_id); ?>"><?php echo esc_html__('Reject', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
+							<a class="button skroutz-reject-order" order-id="<?php echo esc_html($order_id); ?>"><?php echo esc_html__('Reject', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
 	
 						</div>
 				</div>
@@ -867,7 +868,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <?php 
 }
 
-function wpslash_skroutz_smart_cart_states( $state = '' ) {
+function skroutz_smart_cart_states( $state = '' ) {
 		$all_states = array(
 		'open' => esc_html__('Waiting Accept', 'skroutz-marketplace-xml-for-woocommerce'),
 		'accepted' => esc_html__('Accepted', 'skroutz-marketplace-xml-for-woocommerce'),
@@ -889,13 +890,15 @@ function wpslash_skroutz_smart_cart_states( $state = '' ) {
 		}
 }
 
-function wpslash_get_product_id_by_custom_field( $field ) {
+function skroutz_get_product_id_by_custom_field( $field ) {
 	$unique_id_custom_field = get_option( 'wc_settings_tab_wpslash_smart_cart_unique_id_custom_field', '_sku' );
 
 
 	$args = array(
 	'post_type' => 'product',
+	// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 	'meta_key' => $unique_id_custom_field,
+	// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 	'meta_value' => $field, //'meta_value' => array('yes'),
 	'meta_compare' => '==', //'meta_compare' => 'NOT IN'
 );

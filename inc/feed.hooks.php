@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-add_action('init', 'wpslash_smart_cart_header_check_for_skroutz_feed');
-function wpslash_smart_cart_header_check_for_skroutz_feed() {
+add_action('init', 'skroutz_smart_cart_header_check_for_skroutz_feed');
+function skroutz_smart_cart_header_check_for_skroutz_feed() {
 	$security = get_option('wpslash_skroutz_smart_cart_security', false );
 	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	if (isset($_GET['wpslash_skroutz_xml_feed']) && ( sanitize_text_field( wp_unslash( $_GET['wpslash_skroutz_xml_feed'] ) ) == $security )) {
@@ -29,7 +29,7 @@ function wpslash_smart_cart_header_check_for_skroutz_feed() {
 				esc_html_e('XML Feed generation is turned off in settings.', 'skroutz-marketplace-xml-for-woocommerce');
 				die();
 			}
-			wpslash_skroutz_feed_builder_output();
+			skroutz_feed_builder_output();
 			esc_html_e('Please wait while the XML file is getting created for first time....', 'skroutz-marketplace-xml-for-woocommerce');
 			echo esc_html__('Percentage Completed:', 'skroutz-marketplace-xml-for-woocommerce') . ' ' . esc_html($percentage) . '%';
 		}
@@ -39,47 +39,47 @@ function wpslash_smart_cart_header_check_for_skroutz_feed() {
 }
 
 if ( 'yes' !== get_option( 'wc_settings_tab_wpslash_smart_cart_disable_xml_update', 'no' ) ) {
-	add_action( 'wpslash_smart_cart_feed_scheduled_task', 'wpslash_smart_cart_feed_scheduled_task' );
-	add_action( 'wpslash_smart_cart_feed_scheduled_task_second', 'wpslash_smart_cart_feed_scheduled_task_second' );
-	add_action( 'wp', 'wpslash_skroutz_smart_cart_feed_auto_cron' );
+	add_action( 'skroutz_smart_cart_feed_scheduled_task', 'skroutz_smart_cart_feed_scheduled_task' );
+	add_action( 'skroutz_smart_cart_feed_scheduled_task_second', 'skroutz_smart_cart_feed_scheduled_task_second' );
+	add_action( 'wp', 'skroutz_smart_cart_feed_auto_cron' );
 }
 
-function wpslash_smart_cart_feed_scheduled_task() {
+function skroutz_smart_cart_feed_scheduled_task() {
 	if ( 'yes' === get_option( 'wc_settings_tab_wpslash_smart_cart_disable_xml_update', 'no' ) ) {
-		wp_clear_scheduled_hook( 'wpslash_smart_cart_feed_scheduled_task' );
-		wp_clear_scheduled_hook( 'wpslash_smart_cart_feed_scheduled_task_second' );
+		wp_clear_scheduled_hook( 'skroutz_smart_cart_feed_scheduled_task' );
+		wp_clear_scheduled_hook( 'skroutz_smart_cart_feed_scheduled_task_second' );
 		return;
 	}
 
-	wpslash_skroutz_feed_builder_output();
+	skroutz_feed_builder_output();
 }
 
-function wpslash_smart_cart_feed_scheduled_task_second() {
+function skroutz_smart_cart_feed_scheduled_task_second() {
 	if ( 'yes' === get_option( 'wc_settings_tab_wpslash_smart_cart_disable_xml_update', 'no' ) ) {
-		wp_clear_scheduled_hook( 'wpslash_smart_cart_feed_scheduled_task' );
-		wp_clear_scheduled_hook( 'wpslash_smart_cart_feed_scheduled_task_second' );
+		wp_clear_scheduled_hook( 'skroutz_smart_cart_feed_scheduled_task' );
+		wp_clear_scheduled_hook( 'skroutz_smart_cart_feed_scheduled_task_second' );
 		return;
 	}
 
-	wpslash_skroutz_feed_builder_output();
+	skroutz_feed_builder_output();
 }
 
-function wpslash_skroutz_smart_cart_feed_auto_cron() {
+function skroutz_smart_cart_feed_auto_cron() {
 	if ( 'yes' === get_option( 'wc_settings_tab_wpslash_smart_cart_disable_xml_update', 'no' ) ) {
-		wp_clear_scheduled_hook( 'wpslash_smart_cart_feed_scheduled_task' );
+		wp_clear_scheduled_hook( 'skroutz_smart_cart_feed_scheduled_task' );
 		return;
 	}
 
-	if (!wp_next_scheduled('wpslash_smart_cart_feed_scheduled_task')) {
-		wp_schedule_event(time(), 'hourly', 'wpslash_smart_cart_feed_scheduled_task');
+	if (!wp_next_scheduled('skroutz_smart_cart_feed_scheduled_task')) {
+		wp_schedule_event(time(), 'hourly', 'skroutz_smart_cart_feed_scheduled_task');
 	}
 }
 
-function wpslash_skroutz_smart_cart_add_seconds( $schedules ) {
+function skroutz_smart_cart_add_seconds( $schedules ) {
 	$schedules['every_five_seconds'] = array(
 		'interval' => 5,
 		'display'  => __( 'Every  5 Second', 'skroutz-marketplace-xml-for-woocommerce' ),
 	);
 	return $schedules;
 }
-add_filter( 'cron_schedules', 'wpslash_skroutz_smart_cart_add_seconds' );
+add_filter( 'cron_schedules', 'skroutz_smart_cart_add_seconds' );

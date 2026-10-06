@@ -1,5 +1,5 @@
 === Skroutz Marketplace & XML for WooCommerce ===
-Contributors: wpslash, dsdc
+Contributors: GeoNolis
 Tags: skroutz, marketplace, woocommerce, xml feed, smart cart
 Requires at least: 5.0
 Tested up to: 7.1

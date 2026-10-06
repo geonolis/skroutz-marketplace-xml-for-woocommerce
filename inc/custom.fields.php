@@ -4,24 +4,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function wpslash_skroutz_smart_cart_register_meta_boxes() {
+function skroutz_smart_cart_register_meta_boxes() {
 	$alternate_skroutz_image_enabled = get_option('wc_settings_tab_wpslash_smart_cart_alternate_image', 'no');
 	$create_field = get_option('wc_settings_tab_wpslash_smart_cart_alternate_image_create_field', 'no');
 	if (( 'yes'== $alternate_skroutz_image_enabled ) && ( 'yes'== $create_field )) {
-			add_meta_box( 'wpslash-skroutz-alternate-image', __( 'Skroutz Alternate Image', 'skroutz-marketplace-xml-for-woocommerce' ), 'wpslash_skroutz_smart_cart_altenate_image_metabox', 'product', 'side', 'high' );
+			add_meta_box( 'skroutz-alternate-image', __( 'Skroutz Alternate Image', 'skroutz-marketplace-xml-for-woocommerce' ), 'skroutz_smart_cart_altenate_image_metabox', 'product', 'side', 'high' );
 
 	}
 }
-add_action( 'add_meta_boxes', 'wpslash_skroutz_smart_cart_register_meta_boxes' );
+add_action( 'add_meta_boxes', 'skroutz_smart_cart_register_meta_boxes' );
 
-function wpslash_skroutz_smart_cart_altenate_image_metabox() {
+function skroutz_smart_cart_altenate_image_metabox() {
 
 		global $post;
 		$saved_image_id = get_post_meta( $post->ID, 'wpslash_skroutz_custom_image', true );
 		$saved_url = wp_get_attachment_image_src( $saved_image_id, 'thumbnail' );
-		wp_nonce_field( 'wpslash_skroutz_smart_cart_metabox_nonce', 'wpslash_skroutz_smart_cart_nonce' );
+		wp_nonce_field( 'skroutz_smart_cart_metabox_nonce', 'skroutz_smart_cart_nonce' );
 	?>
-		<a id="wpslash_skroutz_image_select_link">
+		<a id="skroutz_image_select_link">
 		<?php
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			?>
 
 
-			 <img width="<?php echo esc_html($saved_url[1]) ; ?>" height="<?php echo esc_html($saved_url[2]) ; ?>" src="<?php echo esc_html($saved_url[0]) ; ?>" class="attachment-post-thumbnail size-post-thumbnail wpslash_skroutz_smart_cart_img" alt="" loading="lazy" id="wpslash_skroutz_smart_cart_img">
+			 <img width="<?php echo esc_html($saved_url[1]) ; ?>" height="<?php echo esc_html($saved_url[2]) ; ?>" src="<?php echo esc_html($saved_url[0]) ; ?>" class="attachment-post-thumbnail size-post-thumbnail skroutz_smart_cart_img" alt="" loading="lazy" id="skroutz_smart_cart_img">
 			<?php else : ?>
 
 				<?php esc_html_e('Choose or Upload Media', 'skroutz-marketplace-xml-for-woocommerce'); ?>
@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			?>
 		</a>
 		<?php if ($saved_url) : ?>
-		<a  id="wpslash_remove_skroutz_thumbnail"><?php esc_html_e('Remove Image', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
+		<a  id="skroutz_remove_thumbnail"><?php esc_html_e('Remove Image', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
 	<?php endif; ?>
 
 				<div>
@@ -63,9 +63,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		wp_nonce_field( 'myplugin_form_metabox_nonce', 'myplugin_form_metabox_process' );
 }
 
-function wpslash_skroutz_smart_cart_save_meta( $post_id ) {
+function skroutz_smart_cart_save_meta( $post_id ) {
 
-	if ( !isset( $_POST['wpslash_skroutz_smart_cart_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wpslash_skroutz_smart_cart_nonce'] ) ), 'wpslash_skroutz_smart_cart_metabox_nonce') ) { 
+	if ( !isset( $_POST['skroutz_smart_cart_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['skroutz_smart_cart_nonce'] ) ), 'skroutz_smart_cart_metabox_nonce') ) { 
 	  return;
 	}
 
@@ -77,20 +77,20 @@ function wpslash_skroutz_smart_cart_save_meta( $post_id ) {
 	  update_post_meta($post_id, 'wpslash_skroutz_custom_image', intval( $_POST['wpslash_skroutz_custom_image']));      
 	}  
 }
-add_action('save_post', 'wpslash_skroutz_smart_cart_save_meta');
+add_action('save_post', 'skroutz_smart_cart_save_meta');
 
 
 
 
 
-add_action( 'woocommerce_product_after_variable_attributes', 'wpslash_skroutz_variation_image_field', 10, 3 );
+add_action( 'woocommerce_product_after_variable_attributes', 'skroutz_variation_image_field', 10, 3 );
 
-function wpslash_skroutz_variation_image_field( $loop, $variation_data, $variation ) {
+function skroutz_variation_image_field( $loop, $variation_data, $variation ) {
 	$alternate_skroutz_image_enabled = get_option('wc_settings_tab_wpslash_smart_cart_alternate_image', 'no');
 	$create_field = get_option('wc_settings_tab_wpslash_smart_cart_alternate_image_create_field', 'no');
 	if (( 'yes'== $alternate_skroutz_image_enabled ) && ( 'yes'== $create_field )) {
 		?>
-	<div class="wpslash_skroutz_variation_alternate_image_wrapper">
+	<div class="skroutz_variation_alternate_image_wrapper">
 		<label><?php esc_html_e('Alternate Skroutz Image', 'skroutz-marketplace-xml-for-woocommerce'); ?></label>
 		<?php
 
@@ -101,9 +101,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		$saved_image_id = get_post_meta( $variation->ID, 'wpslash_skroutz_custom_image_variation', true );
 		$saved_url = wp_get_attachment_image_src( $saved_image_id, 'thumbnail' );
-		wp_nonce_field( 'wpslash_skroutz_smart_cart_metabox_nonce', 'wpslash_skroutz_smart_cart_nonce' );
+		wp_nonce_field( 'skroutz_smart_cart_metabox_nonce', 'skroutz_smart_cart_nonce' );
 		?>
-		<a id="wpslash_skroutz_image_select_link_variation_<?php echo esc_html($loop); ?>">
+		<a id="skroutz_image_select_link_variation_<?php echo esc_html($loop); ?>">
 		<?php
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -113,7 +113,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			?>
 
 
-			 <img width="<?php echo esc_html($saved_url[1]) ; ?>" height="<?php echo esc_html($saved_url[2]) ; ?>" src="<?php echo esc_html($saved_url[0]) ; ?>" class="attachment-post-thumbnail size-post-thumbnail" id="wpslash_skroutz_smart_cart_img_variation_<?php echo esc_html($loop); ?>" alt="" loading="lazy">
+			 <img width="<?php echo esc_html($saved_url[1]) ; ?>" height="<?php echo esc_html($saved_url[2]) ; ?>" src="<?php echo esc_html($saved_url[0]) ; ?>" class="attachment-post-thumbnail size-post-thumbnail" id="skroutz_smart_cart_img_variation_<?php echo esc_html($loop); ?>" alt="" loading="lazy">
 			<?php else : ?>
 
 				<?php esc_html_e('Choose or Upload Media', 'skroutz-marketplace-xml-for-woocommerce'); ?>
@@ -124,7 +124,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			?>
 		</a>
 		<?php if ($saved_url) : ?>
-		<a  id="wpslash_remove_skroutz_thumbnail_variation_<?php echo esc_html($loop); ?>"><?php esc_html_e('Remove Image', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
+		<a  id="skroutz_remove_thumbnail_variation_<?php echo esc_html($loop); ?>"><?php esc_html_e('Remove Image', 'skroutz-marketplace-xml-for-woocommerce'); ?></a>
 	<?php endif; ?>
 
 				<div>
@@ -142,10 +142,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	}
 }
 
-add_action( 'woocommerce_save_product_variation', 'wpslash_skroutz_save_variation_settings_fields', 10, 2 );
+add_action( 'woocommerce_save_product_variation', 'skroutz_save_variation_settings_fields', 10, 2 );
 
-function wpslash_skroutz_save_variation_settings_fields( $variation_id, $loop ) {
-	if ( !isset( $_POST['wpslash_skroutz_smart_cart_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wpslash_skroutz_smart_cart_nonce'] ) ), 'wpslash_skroutz_smart_cart_metabox_nonce') ) { 
+function skroutz_save_variation_settings_fields( $variation_id, $loop ) {
+	if ( !isset( $_POST['skroutz_smart_cart_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['skroutz_smart_cart_nonce'] ) ), 'skroutz_smart_cart_metabox_nonce') ) { 
 	  return;
 	}
 	if ( isset($_POST['wpslash_skroutz_custom_image_variation']) ) {   

@@ -6,28 +6,28 @@ jQuery(document).ready(function($){
 	var metaImageFrame;
 	var metaImageFrames = [];
 
-$(document).on('click', '#wpslash_remove_skroutz_thumbnail', function(e)
+$(document).on('click', '#skroutz_remove_thumbnail', function(e)
 	{
 		$( '#wpslash_skroutz_custom_image' ).val("");
-		$( '#wpslash_skroutz_image_select_link').html('<a class="wpslash_skroutz_image_select_link">'+wpslash_skroutz_smart_cart_product_obj.title+'</a>');
-		$( '#wpslash_remove_skroutz_thumbnail').remove();
+		$( '#skroutz_image_select_link').html('<a class="skroutz_image_select_link">'+skroutz_smart_cart_product_obj.title+'</a>');
+		$( '#skroutz_remove_thumbnail').remove();
 
 	});
 
-$(document).on('click', '[id^="wpslash_remove_skroutz_thumbnail_variation_"]', function(e)
+$(document).on('click', '[id^="skroutz_remove_thumbnail_variation_"]', function(e)
 	{
-				var loop_id  = parseInt(jQuery(this).attr("id").replace('wpslash_remove_skroutz_thumbnail_variation_', ''));
+				var loop_id  = parseInt(jQuery(this).attr("id").replace('skroutz_remove_thumbnail_variation_', ''));
 
 		$( '#wpslash_skroutz_custom_image_variation_'+loop_id ).val("");
-		$( '#wpslash_skroutz_image_select_link_variation_'+loop_id).html('<a class="wpslash_skroutz_image_select_link_variation_'+loop_id+'">'+wpslash_skroutz_smart_cart_product_obj.title+'</a>');
-		$( '#wpslash_remove_skroutz_thumbnail_variation_'+loop_id).remove();
+		$( '#skroutz_image_select_link_variation_'+loop_id).html('<a class="skroutz_image_select_link_variation_'+loop_id+'">'+skroutz_smart_cart_product_obj.title+'</a>');
+		$( '#skroutz_remove_thumbnail_variation_'+loop_id).remove();
 
 	});
 	
 
 
 	// Runs when the media button is clicked.
-	$(document).on('click', '#wpslash_skroutz_image_select_link', function(e)
+	$(document).on('click', '#skroutz_image_select_link', function(e)
 	{
 
 
@@ -35,8 +35,8 @@ $(document).on('click', '[id^="wpslash_remove_skroutz_thumbnail_variation_"]', f
 
 		// Sets up the media library frame
 		metaImageFrame = wp.media.frames.metaImageFrame = wp.media({
-			title: wpslash_skroutz_smart_cart_product_obj.title,
-			button: { text:  wpslash_skroutz_smart_cart_product_obj.button },
+			title: skroutz_smart_cart_product_obj.title,
+			button: { text:  skroutz_smart_cart_product_obj.button },
 		});
 
 		// Runs when an image is selected.
@@ -51,21 +51,21 @@ $(document).on('click', '[id^="wpslash_remove_skroutz_thumbnail_variation_"]', f
 			// Sends the attachment URL to our custom image input field.
 			$( '#wpslash_skroutz_custom_image' ).val(media_attachment.id);
 			
-			if($( '#wpslash_skroutz_smart_cart_img' ).length)
+			if($( '#skroutz_smart_cart_img' ).length)
 			{
-				jQuery('#wpslash_skroutz_smart_cart_img').attr('src', media_attachment.sizes.thumbnail.url);
-				jQuery('#wpslash_skroutz_smart_cart_img').attr('width', media_attachment.sizes.thumbnail.width);
-				jQuery('#wpslash_skroutz_smart_cart_img').attr('height', media_attachment.sizes.thumbnail.height);
+				jQuery('#skroutz_smart_cart_img').attr('src', media_attachment.sizes.thumbnail.url);
+				jQuery('#skroutz_smart_cart_img').attr('width', media_attachment.sizes.thumbnail.width);
+				jQuery('#skroutz_smart_cart_img').attr('height', media_attachment.sizes.thumbnail.height);
 	
 			}
 			else
 			{
-			 jQuery('#wpslash_skroutz_image_select_link').html('<img width="'+media_attachment.sizes.thumbnail.width+'" height="'+media_attachment.sizes.thumbnail.width+'" src="'+media_attachment.sizes.thumbnail.url+'" class="attachment-post-thumbnail size-post-thumbnail wpslash_skroutz_smart_cart_img" alt="" loading="lazy">')
+			 jQuery('#skroutz_image_select_link').html('<img width="'+media_attachment.sizes.thumbnail.width+'" height="'+media_attachment.sizes.thumbnail.width+'" src="'+media_attachment.sizes.thumbnail.url+'" class="attachment-post-thumbnail size-post-thumbnail skroutz_smart_cart_img" alt="" loading="lazy">')
 
 			}
-			if(!jQuery('#wpslash_remove_skroutz_thumbnail').length)
+			if(!jQuery('#skroutz_remove_thumbnail').length)
 				{
-											jQuery('#wpslash_skroutz_image_select_link').next().append('<a  id="wpslash_remove_skroutz_thumbnail">'+wpslash_skroutz_smart_cart_product_obj.remove+'</a>');
+											jQuery('#skroutz_image_select_link').next().append('<a  id="skroutz_remove_thumbnail">'+skroutz_smart_cart_product_obj.remove+'</a>');
 
 				}
 
@@ -108,17 +108,17 @@ metaImageFrame.on('open', function() {
 
 
 
-	$(document).on('click', '[id^="wpslash_skroutz_image_select_link_variation_"]', function(e)
+	$(document).on('click', '[id^="skroutz_image_select_link_variation_"]', function(e)
 	{
 
-		var loop_id  = parseInt(jQuery(this).attr("id").replace('wpslash_skroutz_image_select_link_variation_', ''));
+		var loop_id  = parseInt(jQuery(this).attr("id").replace('skroutz_image_select_link_variation_', ''));
 
 		e.preventDefault();
 
 		// Sets up the media library frame
 		metaImageFrames[loop_id] = wp.media.frames.metaImageFrame = wp.media({
-			title: wpslash_skroutz_smart_cart_product_obj.title,
-			button: { text:  wpslash_skroutz_smart_cart_product_obj.button },
+			title: skroutz_smart_cart_product_obj.title,
+			button: { text:  skroutz_smart_cart_product_obj.button },
 		});
 
 		// Runs when an image is selected.
@@ -136,21 +136,21 @@ metaImageFrame.on('open', function() {
 
 			jQuery('#wpslash_skroutz_custom_image_variation_1').trigger('change');
 			
-			if($( '#wpslash_skroutz_smart_cart_img_variation_'+loop_id ).length)
+			if($( '#skroutz_smart_cart_img_variation_'+loop_id ).length)
 			{
-				jQuery('#wpslash_skroutz_smart_cart_img_variation_'+loop_id).attr('src', media_attachment.sizes.thumbnail.url);
-				jQuery('#wpslash_skroutz_smart_cart_img_variation_'+loop_id).attr('width', media_attachment.sizes.thumbnail.width);
-				jQuery('#wpslash_skroutz_smart_cart_img_variation_'+loop_id).attr('height', media_attachment.sizes.thumbnail.height);
+				jQuery('#skroutz_smart_cart_img_variation_'+loop_id).attr('src', media_attachment.sizes.thumbnail.url);
+				jQuery('#skroutz_smart_cart_img_variation_'+loop_id).attr('width', media_attachment.sizes.thumbnail.width);
+				jQuery('#skroutz_smart_cart_img_variation_'+loop_id).attr('height', media_attachment.sizes.thumbnail.height);
 	
 			}
 			else
 			{
-			 jQuery('#wpslash_skroutz_image_select_link_variation_'+loop_id).html('<img width="'+media_attachment.sizes.thumbnail.width+'" height="'+media_attachment.sizes.thumbnail.width+'" src="'+media_attachment.sizes.thumbnail.url+'" class="attachment-post-thumbnail size-post-thumbnail wpslash_skroutz_smart_cart_img" alt="" loading="lazy">')
+			 jQuery('#skroutz_image_select_link_variation_'+loop_id).html('<img width="'+media_attachment.sizes.thumbnail.width+'" height="'+media_attachment.sizes.thumbnail.width+'" src="'+media_attachment.sizes.thumbnail.url+'" class="attachment-post-thumbnail size-post-thumbnail skroutz_smart_cart_img" alt="" loading="lazy">')
 
 			}
-			if(jQuery('#wpslash_remove_skroutz_thumbnail_variation_'+loop_id+'').length == 0)
+			if(jQuery('#skroutz_remove_thumbnail_variation_'+loop_id+'').length == 0)
 				{
-				jQuery('#wpslash_skroutz_image_select_link_variation_'+loop_id).next().html('<a  id="wpslash_remove_skroutz_thumbnail_variation_'+loop_id+'">'+wpslash_skroutz_smart_cart_product_obj.remove+'</a>');
+				jQuery('#skroutz_image_select_link_variation_'+loop_id).next().html('<a  id="skroutz_remove_thumbnail_variation_'+loop_id+'">'+skroutz_smart_cart_product_obj.remove+'</a>');
 
 				}
 
