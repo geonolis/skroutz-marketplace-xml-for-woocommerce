@@ -20,7 +20,7 @@ function skroutz_smart_cart_enqueue_styles( $hook ) {
 
 	if ( $is_order_screen ) {
 
-		wp_enqueue_style( 'skroutz-smart-cart-css', WPSSSC_DIR_URL . 'css/main.css', array(), '1.1.3', 'all' );
+		wp_enqueue_style( 'skroutz-smart-cart-css', WPSSSC_DIR_URL . 'css/main.css', array(), '1.1.4', 'all' );
 		wp_enqueue_script( 'skroutz-smart-cart-js', WPSSSC_DIR_URL . 'js/main.js', array( 'jquery' ), '0.1.1', true );
 		wp_localize_script( 'skroutz-smart-cart-js', 'skroutz_smart_cart_order_obj',
 			array( 

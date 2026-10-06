@@ -49,7 +49,7 @@ display:block;
     color: #5b841b;
     padding: 1px 5px;
     line-height: 14px;
-    font-size: 10px;
+    font-size: 11px;
     text-align: center;
     border-radius: 3px;
 }
@@ -82,7 +82,7 @@ display:block;
 }
 
 .skroutz-courier {
-	font-size: 10.5px;
+	font-size: 12px;
 	font-weight: 600;
 	line-height: 1.2;
 }
@@ -91,7 +91,7 @@ display:block;
     display: inline-block;
     border: 1px dashed #2271b1;
     padding: 0 3px;
-    font-size: 9.5px;
+    font-size: 10.5px;
     line-height: 13px;
     text-align: center;
     border-radius: 3px;
@@ -152,10 +152,10 @@ margin-top: 6px;
 	padding-left: 6px !important;
 	padding-right: 6px !important;
 	vertical-align: middle;
-	font-size: 10.5px;
+	font-size: 12px;
 	line-height: 1.25;
-	width: 140px;
-	min-width: 135px;
+	width: 120px;
+	min-width: 115px;
 }
 
 .post-type-shop_order .wp-list-table tbody td.column-skroutz_smart_cart:last-child,
@@ -167,8 +167,8 @@ margin-top: 6px;
 @media screen and (min-width: 1440px){
 	#skroutz_smart_cart,
 	#wpslash_skroutz_smart_cart {
-		min-width: 140px;
-		width: 15ch;
+		min-width: 120px;
+		width: 13ch;
 	}
 }
 
@@ -178,7 +178,7 @@ margin-top: 6px;
     align-items: center;
     align-self: stretch;
     flex: 1;
-    font-size: 10.5px;
+    font-size: 12px;
     line-height: 1.2;
 }
 
@@ -191,7 +191,7 @@ span.img-wrapper img {
 }
 
 span.img-wrapper a {
-	font-size: 10.5px;
+	font-size: 12px;
 	line-height: 1.2;
 	word-break: break-all;
 }
@@ -222,7 +222,7 @@ a.button.skroutz-print-voucher {
 	max-width: 100%;
 	box-sizing: border-box;
 	padding: 1px 8px !important;
-	font-size: 10px !important;
+	font-size: 11px !important;
 	line-height: 2 !important;
 	min-height: 20px !important;
 	height: auto !important;
@@ -235,7 +235,7 @@ a.button.skroutz-print-voucher {
 
 .skroutz-waiting-voucher {
 	display: block;
-	font-size: 9.5px;
+	font-size: 11px;
 	line-height: 12px;
 	color: #666;
 	font-style: italic;
@@ -249,7 +249,7 @@ a.button.skroutz-toggle-reject-order,
 a.button.skroutz-toggle-invoice-order {
 	text-align: center;
 	white-space: normal;
-	font-size: 10px;
+	font-size: 11px;
 	line-height: 14px;
 	padding: 2px 4px;
 	margin-bottom: 2px;
