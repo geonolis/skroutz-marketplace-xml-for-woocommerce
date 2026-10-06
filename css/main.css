@@ -44,13 +44,14 @@ display:block;
 }
 
 .skroutz-status {
+    display: inline-block;
     background: rgb(198 225 198);
     color: #5b841b;
-    padding: 0px 8px;
+    padding: 1px 5px;
     line-height: 14px;
+    font-size: 10px;
     text-align: center;
-    border-radius: 4px;
-    line-height: 2.5em;
+    border-radius: 3px;
 }
 
 .skroutz-status.dispatched {
@@ -80,16 +81,23 @@ display:block;
   color: #2e4453;
 }
 
+.skroutz-courier {
+	font-size: 10.5px;
+	font-weight: 600;
+	line-height: 1.2;
+}
+
 .skroutz-tracking-code {
+    display: inline-block;
     border: 1px dashed #2271b1;
-    padding: 1px;
+    padding: 0 3px;
+    font-size: 9.5px;
+    line-height: 13px;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 3px;
     background: #f7fcff;
     color: #2271b1;
-}
-.skroutz-courier{
-	font-weight: bold;
+    word-break: break-all;
 }
 
 .skroutz_smart_cart_field_wrapper {
@@ -135,17 +143,30 @@ margin-top: 6px;
 	pointer-events: none;
 }
 
-.post-type-shop_order .wp-list-table tbody td:last-child {
-	padding-right: 1em!important;
+.wp-list-table th.column-skroutz_smart_cart,
+.wp-list-table th#skroutz_smart_cart,
+.wp-list-table th#wpslash_skroutz_smart_cart,
+.wp-list-table td.column-skroutz_smart_cart,
+.wp-list-table td.column-wpslash_skroutz_smart_cart,
+.wp-list-table td.skroutz_smart_cart {
+	padding-left: 4px !important;
+	padding-right: 4px !important;
+	vertical-align: middle;
+	font-size: 10.5px;
+	line-height: 1.25;
 }
 
-
+.post-type-shop_order .wp-list-table tbody td.column-skroutz_smart_cart:last-child,
+.post-type-shop_order .wp-list-table tbody td.column-wpslash_skroutz_smart_cart:last-child,
+.post-type-shop_order .wp-list-table tbody td.skroutz_smart_cart:last-child {
+	padding-right: 4px !important;
+}
 
 @media screen and (min-width: 1440px){
-
 	#skroutz_smart_cart,
 	#wpslash_skroutz_smart_cart {
-		width: 8ch;
+		min-width: 95px;
+		width: 11ch;
 	}
 }
 
@@ -155,28 +176,79 @@ margin-top: 6px;
     align-items: center;
     align-self: stretch;
     flex: 1;
+    font-size: 10.5px;
+    line-height: 1.2;
 }
 
 span.img-wrapper img {
-	border-radius: 4px;
-	margin-right: 5px!important;
+	height: 14px !important;
+	width: 14px !important;
+	border-radius: 3px;
+	margin-right: 3px !important;
+	flex-shrink: 0;
+}
+
+span.img-wrapper a {
+	font-size: 10.5px;
+	line-height: 1.2;
+	word-break: break-all;
 }
 
 .column-skroutz_smart_cart .row:not(:first-child),
-.column-wpslash_skroutz_smart_cart .row:not(:first-child) {
-	margin-top: 6px;
+.column-wpslash_skroutz_smart_cart .row:not(:first-child),
+td.skroutz_smart_cart .row:not(:first-child) {
+	margin-top: 2px;
 }
 
-a.button.skroutz-print-voucher,
+.column-skroutz_smart_cart .column,
+.column-wpslash_skroutz_smart_cart .column,
+td.skroutz_smart_cart .column {
+	margin-bottom: 1px;
+	line-height: 1.2;
+}
+
+.column-skroutz_smart_cart .column.half,
+.column-wpslash_skroutz_smart_cart .column.half,
+td.skroutz_smart_cart .column.half {
+	width: 100%;
+}
+
+a.button.skroutz-print-voucher {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
+	padding: 1px 3px !important;
+	font-size: 10px !important;
+	line-height: 18px !important;
+	min-height: 20px !important;
+	height: auto !important;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin: 2px 0 0 0 !important;
+}
+
+.skroutz-waiting-voucher {
+	display: block;
+	font-size: 9.5px;
+	line-height: 12px;
+	color: #666;
+	font-style: italic;
+}
+
 a.button.skroutz-toggle-accept-order,
 a.button.skroutz-toggle-reject-order,
 a.button.skroutz-toggle-invoice-order {
 	text-align: center;
-    white-space: normal;
-line-height: 16px;
-padding-top: 2px;
-padding-bottom: 2px;
-margin-bottom: 3px;
+	white-space: normal;
+	font-size: 10px;
+	line-height: 14px;
+	padding: 2px 4px;
+	margin-bottom: 2px;
+	box-sizing: border-box;
+	width: 100%;
 }
 
 a.button.skroutz-toggle-accept-order {
